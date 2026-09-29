@@ -23,7 +23,10 @@ navDots.forEach(dot => {
 });
 
 const revealElements = document.querySelectorAll('.card, .step, .complex-card, .code-panel, .student-table, .point, .thank-you, .compare-table-wrapper');
-revealElements.forEach(el => el.classList.add('reveal'));
+revealElements.forEach((el, i) => {
+  el.classList.add('reveal');
+  el.style.transitionDelay = Math.min(i % 4, 3) * 0.08 + 's';
+});
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
