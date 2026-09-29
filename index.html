@@ -47,7 +47,6 @@
       <h2>Từ ý tưởng</h2>
       <div class="script-block">
         <span class="speaker-tag">Đọc to</span>
-        <p>Xin chào mọi người. Hôm nay nhóm chúng em xin trình bày về <strong>Phương pháp Chèn Trực tiếp</strong>, còn gọi là <strong>Insertion Sort (Sắp xếp chèn)</strong>.</p>
         <p>Ý tưởng giống như sắp xếp bài trong tay: lần lượt lấy từng lá bài và <strong>chèn vào đúng vị trí</strong> trong dãy đã sắp. Coi phần tử đầu đã sắp xếp. Lấy key bằng a[i], dịch các phần tử lớn hơn key sang phải, rồi chèn key vào vị trí trống vừa tạo.</p>
         <p>Thuật toán này <strong>ổn định</strong> và đặc biệt hiệu quả khi dữ liệu gần như đã sắp sẵn – trường hợp tốt nhất chỉ còn O(n).</p>
       </div>
@@ -77,13 +76,13 @@
         <span class="speaker-tag">Đọc to</span>
         <p><strong>Bước 1:</strong> i chạy từ 1 đến n−1 (phần tử đầu coi như đã sắp).</p>
         <p><strong>Bước 2:</strong> key ← a[i], j ← i−1.</p>
-        <p><strong>Bước 3:</strong> Trong khi j ≥ 0 và a[j] &gt; key: dịch a[j] sang phải (a[j+1] ← a[j]), giảm j.</p>
+        <p><strong>Bước 3:</strong> Trong khi j ≥ 0 và a[j] > key: dịch a[j] sang phải (a[j+1] ← a[j]), giảm j.</p>
         <p><strong>Bước 4:</strong> a[j+1] ← key – chèn key vào vị trí đúng. Nếu mảng đã sắp, vòng while không chạy → đạt O(n).</p>
       </div>
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Bắt đầu từ i=1</h4><p>i: 1 → n−1</p></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Lưu key</h4><p>key ← a[i], j ← i−1</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Dịch phần tử</h4><p>while a[j] &gt; key</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Dịch phần tử</h4><p>while a[j] > key</p></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Chèn key</h4><p>a[j+1] ← key</p></div></div>
       </div>
     </div>
@@ -116,7 +115,7 @@
   <section class="section" id="code">
     <div class="container">
       <div class="section-label">05 · Người trình bày 5</div>
-      <h2>Mã giả &amp; Cài đặt C++</h2>
+      <h2>Mã giả & Cài đặt C++</h2>
       <div class="script-block">
         <span class="speaker-tag">Đọc to</span>
         <p>Mã giả: vòng for từ i=1 đến n−1, lưu key, dùng while để dịch phần tử lớn hơn key sang phải, rồi chèn key. Code C++ tương tự. Biến key lưu giá trị đang xét. Vòng while dịch phần tử. Khi dừng, vị trí j+1 là chỗ trống để chèn. Nếu mảng đã sắp thì while không chạy → O(n).</p>
@@ -129,7 +128,7 @@
   for i ← 1 to n−1 do
     key ← a[i]
     j ← i − 1
-    while j ≥ 0 and a[j] &gt; key do
+    while j ≥ 0 and a[j] > key do
       a[j+1] ← a[j]
       j ← j − 1
     end while
@@ -137,10 +136,10 @@
   end for
 end procedure</code></pre></div>
       <div class="code-panel" id="cpp"><pre><code>void insertionSort(int a[], int n) {
-  for (int i = 1; i &lt; n; i++) {
+  for (int i = 1; i < n; i++) {
     int key = a[i];
     int j = i - 1;
-    while (j &gt;= 0 && a[j] &gt; key) {
+    while (j >= 0 && a[j] > key) {
       a[j + 1] = a[j];
       j--;
     }
