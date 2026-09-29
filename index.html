@@ -3,24 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phương pháp Chèn Trực tiếp – Insertion Sort</title>
+  <title>Phương pháp Chèn Trực tiếp – Insertion Sort (Sắp xếp chèn)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .speaker-tag { display:inline-block; background:rgba(124,108,240,0.2); color:var(--accent-soft); font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:20px; margin-bottom:16px; }
+    .script-block { background:var(--bg-card); border-radius:var(--radius); padding:28px 32px; border:1px solid rgba(255,255,255,0.05); margin-bottom:20px; border-left:4px solid var(--accent); }
+    .script-block p { color:var(--text-muted); font-size:1.05rem; line-height:1.75; margin-bottom:14px; }
+    .script-block p:last-child { margin-bottom:0; }
+    .script-block strong { color:var(--text); }
+  </style>
 </head>
 <body>
   <div class="progress-bar" id="progressBar"></div>
   <nav class="nav-dots" id="navDots">
-    <a href="#hero" data-section="0" data-label="Trang chủ" class="active"></a>
+    <a href="#hero" data-section="0" data-label="Mở đầu" class="active"></a>
     <a href="#idea" data-section="1" data-label="Ý tưởng"></a>
-    <a href="#algo" data-section="2" data-label="Thuật toán"></a>
-    <a href="#complexity" data-section="3" data-label="Độ phức tạp"></a>
+    <a href="#when" data-section="2" data-label="Khi nào dùng"></a>
+    <a href="#algo" data-section="3" data-label="Thuật toán"></a>
     <a href="#visual" data-section="4" data-label="Minh họa"></a>
     <a href="#code" data-section="5" data-label="Mã nguồn"></a>
     <a href="#example" data-section="6" data-label="Ví dụ"></a>
-    <a href="#proscons" data-section="7" data-label="Ưu nhược"></a>
-    <a href="#compare" data-section="8" data-label="So sánh"></a>
+    <a href="#pros" data-section="7" data-label="Ưu điểm"></a>
+    <a href="#cons" data-section="8" data-label="Nhược điểm"></a>
     <a href="#conclusion" data-section="9" data-label="Kết luận"></a>
   </nav>
 
@@ -28,116 +35,72 @@
     <div class="hero-content">
       <p class="eyebrow">Các phương pháp sắp xếp thông dụng</p>
       <h1>Phương pháp<br><span class="highlight">Chèn Trực tiếp</span></h1>
-      <p class="subtitle">Insertion Sort</p>
-      <p class="hero-desc">Bài thuyết trình chi tiết về thuật toán sắp xếp bằng phương pháp chèn trực tiếp</p>
-      <div class="scroll-hint">
-        <span>Cuộn xuống để khám phá</span>
-        <div class="mouse"></div>
-      </div>
+      <p class="subtitle">Insertion Sort (Sắp xếp chèn)</p>
+      <p class="hero-desc">Bài thuyết trình nhóm – khoảng 10 người lần lượt trình bày</p>
+      <div class="scroll-hint"><span>Cuộn xuống để bắt đầu</span><div class="mouse"></div></div>
     </div>
   </section>
 
   <section class="section" id="idea">
     <div class="container">
-      <div class="section-label">01</div>
+      <div class="section-label">01 · Người trình bày 1</div>
       <h2>Từ ý tưởng</h2>
-      <div class="two-col">
-        <div class="card main-idea">
-          <h3>Ý tưởng cốt lõi</h3>
-          <p>Giống sắp xếp bài trong tay: lần lượt lấy từng lá và <strong>chèn vào đúng vị trí</strong> trong dãy đã sắp.</p>
-          <div class="analogy">
-            <div class="analogy-icon">🃏</div>
-            <p>Ổn định và hiệu quả khi dữ liệu gần như đã sắp.</p>
-          </div>
-        </div>
-        <div class="card-stack">
-          <div class="card feature">
-            <span class="num">01</span>
-            <h4>Coi phần tử đầu đã sắp</h4>
-            <p>key = a[i], dịch các phần tử lớn hơn sang phải</p>
-          </div>
-          <div class="card feature">
-            <span class="num">02</span>
-            <h4>Chèn key vào vị trí trống</h4>
-            <p>Sau khi dịch xong</p>
-          </div>
-        </div>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Xin chào mọi người. Hôm nay nhóm chúng em xin trình bày về <strong>Phương pháp Chèn Trực tiếp</strong>, còn gọi là <strong>Insertion Sort (Sắp xếp chèn)</strong>.</p>
+        <p>Ý tưởng giống như sắp xếp bài trong tay: lần lượt lấy từng lá bài và <strong>chèn vào đúng vị trí</strong> trong dãy đã sắp. Coi phần tử đầu đã sắp xếp. Lấy key bằng a[i], dịch các phần tử lớn hơn key sang phải, rồi chèn key vào vị trí trống vừa tạo.</p>
+        <p>Thuật toán này <strong>ổn định</strong> và đặc biệt hiệu quả khi dữ liệu gần như đã sắp sẵn – trường hợp tốt nhất chỉ còn O(n).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="when">
+    <div class="container">
+      <div class="section-label">02 · Người trình bày 2</div>
+      <h2>Khi nào nên dùng / không nên dùng</h2>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Insertion Sort phù hợp khi dữ liệu gần đúng hoặc gần sắp, mảng nhỏ đến trung bình, cần thuật toán ổn định, hoặc cần sắp xếp online (nhận dữ liệu dần). Không phù hợp khi dữ liệu lớn và đảo ngược hoàn toàn, hoặc yêu cầu hiệu suất cao trên tập lớn.</p>
       </div>
       <div class="suitable-grid">
-        <div class="card good">
-          <h4>✓ Phù hợp khi nào?</h4>
-          <ul>
-            <li>Dữ liệu gần đúng / gần sắp</li>
-            <li>Mảng nhỏ đến trung bình</li>
-            <li>Cần thuật toán ổn định</li>
-            <li>Online sorting</li>
-          </ul>
-        </div>
-        <div class="card bad">
-          <h4>✗ Không phù hợp khi?</h4>
-          <ul>
-            <li>Dữ liệu lớn và đảo ngược</li>
-            <li>Cần hiệu suất cao</li>
-          </ul>
-        </div>
+        <div class="card good"><h4>✓ Phù hợp khi</h4><ul><li>Dữ liệu gần đúng / gần sắp</li><li>Mảng nhỏ đến trung bình</li><li>Cần thuật toán ổn định</li><li>Online sorting (sắp xếp trực tuyến)</li></ul></div>
+        <div class="card bad"><h4>✗ Không phù hợp khi</h4><ul><li>Dữ liệu lớn và đảo ngược</li><li>Cần hiệu suất cao</li></ul></div>
       </div>
     </div>
   </section>
 
-  <section class="section dark" id="algo">
+  <section class="section" id="algo">
     <div class="container">
-      <div class="section-label">02</div>
+      <div class="section-label">03 · Người trình bày 3</div>
       <h2>Thuật toán chi tiết</h2>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Bắt đầu từ i = 1</h4><p>i chạy từ 1 → n−1</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Lưu key</h4><p>key ← a[i], j ← i−1</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Dịch phần tử</h4><p>Trong khi j ≥ 0 và a[j] &gt; key: a[j+1] ← a[j]; j ← j−1</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Chèn key</h4><p>a[j+1] ← key (chèn vào vị trí đúng)</p></div></div>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p><strong>Bước 1:</strong> i chạy từ 1 đến n−1 (phần tử đầu coi như đã sắp).</p>
+        <p><strong>Bước 2:</strong> key ← a[i], j ← i−1.</p>
+        <p><strong>Bước 3:</strong> Trong khi j ≥ 0 và a[j] &gt; key: dịch a[j] sang phải (a[j+1] ← a[j]), giảm j.</p>
+        <p><strong>Bước 4:</strong> a[j+1] ← key – chèn key vào vị trí đúng. Nếu mảng đã sắp, vòng while không chạy → đạt O(n).</p>
       </div>
-    </div>
-  </section>
-
-  <section class="section" id="complexity">
-    <div class="container">
-      <div class="section-label">03</div>
-      <h2>Độ phức tạp</h2>
-      <div class="complexity-grid">
-        <div class="card complex-card">
-          <div class="icon-circle time">⏱</div>
-          <h3>Thời gian</h3>
-          <div class="big-o">O(n²)</div>
-          <ul>
-            <li>Tốt nhất: O(n)</li>
-            <li>Trung bình: O(n²)</li>
-            <li>Xấu nhất: O(n²)</li>
-          </ul>
-        </div>
-        <div class="card complex-card">
-          <div class="icon-circle space">💾</div>
-          <h3>Không gian</h3>
-          <div class="big-o">O(1)</div>
-          <ul>
-            <li>In-place</li>
-            <li>Chỉ cần biến tạm</li>
-          </ul>
-        </div>
-        <div class="card complex-card">
-          <div class="icon-circle stable">⚖</div>
-          <h3>Ổn định</h3>
-          <div class="big-o" style="color:var(--green);font-size:1.9rem">Có</div>
-          <ul>
-            <li>Stable – giữ thứ tự phần tử bằng nhau</li>
-          </ul>
-        </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Bắt đầu từ i=1</h4><p>i: 1 → n−1</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Lưu key</h4><p>key ← a[i], j ← i−1</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Dịch phần tử</h4><p>while a[j] &gt; key</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Chèn key</h4><p>a[j+1] ← key</p></div></div>
       </div>
     </div>
   </section>
 
   <section class="section dark" id="visual">
     <div class="container">
-      <div class="section-label">04</div>
+      <div class="section-label">04 · Người trình bày 4</div>
       <h2>Sơ đồ minh họa từng bước</h2>
-      <p class="section-desc">Theo dõi quá trình sắp xếp mảng: <strong>12, 11, 13, 5, 6</strong></p>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Minh họa với mảng <strong>12, 11, 13, 5, 6</strong>.</p>
+        <p>i=1, key=11: dịch 12 sang phải, chèn 11 → 11,12,13,5,6.</p>
+        <p>i=2, key=13: không cần dịch → giữ nguyên.</p>
+        <p>i=3, key=5: dịch 11,12,13 sang phải, chèn 5 → 5,11,12,13,6.</p>
+        <p>i=4, key=6: dịch 11,12,13, chèn 6 → 5,6,11,12,13. Đã sắp xong. Mọi người bấm nút bên dưới để xem từng bước.</p>
+      </div>
       <div class="visualizer">
         <div class="array-state" id="arrayState"></div>
         <div class="visual-controls">
@@ -152,14 +115,17 @@
 
   <section class="section" id="code">
     <div class="container">
-      <div class="section-label">05</div>
+      <div class="section-label">05 · Người trình bày 5</div>
       <h2>Mã giả &amp; Cài đặt C++</h2>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Mã giả: vòng for từ i=1 đến n−1, lưu key, dùng while để dịch phần tử lớn hơn key sang phải, rồi chèn key. Code C++ tương tự. Biến key lưu giá trị đang xét. Vòng while dịch phần tử. Khi dừng, vị trí j+1 là chỗ trống để chèn. Nếu mảng đã sắp thì while không chạy → O(n).</p>
+      </div>
       <div class="code-tabs">
         <button class="tab active" data-tab="pseudo">Mã giả</button>
         <button class="tab" data-tab="cpp">C++</button>
       </div>
-      <div class="code-panel active" id="pseudo">
-<pre><code>procedure InsertionSort(a[0..n−1])
+      <div class="code-panel active" id="pseudo"><pre><code>procedure InsertionSort(a[0..n−1])
   for i ← 1 to n−1 do
     key ← a[i]
     j ← i − 1
@@ -169,10 +135,8 @@
     end while
     a[j+1] ← key
   end for
-end procedure</code></pre>
-      </div>
-      <div class="code-panel" id="cpp">
-<pre><code>void insertionSort(int a[], int n) {
+end procedure</code></pre></div>
+      <div class="code-panel" id="cpp"><pre><code>void insertionSort(int a[], int n) {
   for (int i = 1; i &lt; n; i++) {
     int key = a[i];
     int j = i - 1;
@@ -182,11 +146,10 @@ end procedure</code></pre>
     }
     a[j + 1] = key;
   }
-}</code></pre>
-      </div>
+}</code></pre></div>
       <div class="code-notes">
         <div class="note-item"><strong>key:</strong> lưu giá trị đang xét để chèn</div>
-        <div class="note-item"><strong>Vòng while:</strong> dịch các phần tử lớn hơn key sang phải</div>
+        <div class="note-item"><strong>Vòng while:</strong> dịch phần tử lớn hơn key sang phải</div>
         <div class="note-item"><strong>Vị trí j+1:</strong> chỗ trống để chèn key</div>
         <div class="note-item"><strong>Nếu đã sắp:</strong> while không chạy → O(n)</div>
       </div>
@@ -195,9 +158,12 @@ end procedure</code></pre>
 
   <section class="section dark" id="example">
     <div class="container">
-      <div class="section-label">06</div>
+      <div class="section-label">06 · Người trình bày 6</div>
       <h2>Mô hình ví dụ – Sinh viên</h2>
-      <p class="section-desc">Sắp xếp danh sách sinh viên theo điểm tăng dần</p>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Ứng dụng: sắp xếp danh sách sinh viên theo điểm tăng dần. Ví dụ bốn sinh viên sau khi sắp: Lê Văn C 6.8 → Nguyễn Văn A 7.5 → Trần Thị B 8.2 → Phạm Thị D 9.0.</p>
+      </div>
       <div class="student-table">
         <div class="table-header"><span>Mã SV</span><span>Họ tên</span><span>Điểm TB</span></div>
         <div class="table-row before"><span>SV001</span><span>Nguyễn Văn A</span><span class="score">7.5</span></div>
@@ -205,7 +171,7 @@ end procedure</code></pre>
         <div class="table-row before"><span>SV003</span><span>Lê Văn C</span><span class="score">6.8</span></div>
         <div class="table-row before"><span>SV004</span><span>Phạm Thị D</span><span class="score">9.0</span></div>
       </div>
-      <div class="arrow-down">↓ Insertion Sort theo điểm ↓</div>
+      <div class="arrow-down">↓ Insertion Sort (Sắp xếp chèn) theo điểm ↓</div>
       <div class="student-table sorted">
         <div class="table-header"><span>#</span><span>Họ tên</span><span>Điểm TB</span></div>
         <div class="table-row after"><span>1</span><span>Lê Văn C</span><span class="score">6.8</span></div>
@@ -216,67 +182,46 @@ end procedure</code></pre>
     </div>
   </section>
 
-  <section class="section" id="proscons">
+  <section class="section" id="pros">
     <div class="container">
-      <div class="section-label">07</div>
-      <h2>Ưu &amp; Nhược điểm</h2>
-      <div class="pros-cons">
-        <div class="card pros">
-          <h3>Ưu điểm</h3>
-          <ul>
-            <li>Ổn định (stable)</li>
-            <li>Hiệu quả với dữ liệu gần sắp xếp</li>
-            <li>Online: có thể sắp khi đang nhận dữ liệu</li>
-            <li>Ít bộ nhớ phụ, dễ cài đặt</li>
-          </ul>
-        </div>
-        <div class="card cons">
-          <h3>Nhược điểm</h3>
-          <ul>
-            <li>O(n²) trong trường hợp xấu</li>
-            <li>Chậm với mảng lớn và đảo ngược hoàn toàn</li>
-            <li>Nhiều lần dịch chuyển phần tử</li>
-          </ul>
-        </div>
+      <div class="section-label">07 · Người trình bày 7</div>
+      <h2>Ưu điểm</h2>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Insertion Sort ổn định (stable) – giữ thứ tự phần tử bằng nhau. Hiệu quả với dữ liệu gần sắp xếp. Hỗ trợ online sorting: có thể sắp khi đang nhận dữ liệu. Ít bộ nhớ phụ, dễ cài đặt. Được dùng trong Timsort (thuật toán kết hợp) của Python và Java cho đoạn nhỏ.</p>
+      </div>
+      <div class="card pros" style="border-top:3px solid var(--green)">
+        <ul><li>Ổn định (stable)</li><li>Hiệu quả với dữ liệu gần sắp xếp</li><li>Online: sắp khi đang nhận dữ liệu</li><li>Ít bộ nhớ phụ, dễ cài đặt</li></ul>
       </div>
     </div>
   </section>
 
-  <section class="section dark" id="compare">
+  <section class="section dark" id="cons">
     <div class="container">
-      <div class="section-label">08</div>
-      <h2>So sánh nhanh</h2>
-      <div class="compare-table-wrapper">
-        <table class="compare-table">
-          <thead>
-            <tr><th>Tiêu chí</th><th>Selection</th><th>Insertion</th><th>Bubble</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Thời gian TB</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td></tr>
-            <tr><td>Tốt nhất</td><td>O(n²)</td><td class="good-cell">O(n)</td><td class="good-cell">O(n)</td></tr>
-            <tr><td>Ổn định</td><td class="bad-cell">Không</td><td class="good-cell">Có</td><td class="good-cell">Có</td></tr>
-            <tr><td>Số lần swap</td><td class="good-cell">Ít</td><td>Trung bình</td><td class="bad-cell">Nhiều</td></tr>
-            <tr><td>Dễ cài đặt</td><td class="good-cell">Rất dễ</td><td>Dễ</td><td class="good-cell">Rất dễ</td></tr>
-          </tbody>
-        </table>
+      <div class="section-label">08 · Người trình bày 8</div>
+      <h2>Nhược điểm</h2>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Trường hợp xấu vẫn O(n²). Chậm với mảng lớn và đảo ngược hoàn toàn. Có nhiều lần dịch chuyển phần tử – mỗi lần chèn có thể phải dịch cả đoạn đã sắp.</p>
+      </div>
+      <div class="card cons" style="border-top:3px solid var(--red)">
+        <ul><li>O(n²) trong trường hợp xấu</li><li>Chậm với mảng lớn đảo ngược</li><li>Nhiều lần dịch chuyển phần tử</li></ul>
       </div>
     </div>
   </section>
 
   <section class="section conclusion" id="conclusion">
     <div class="container">
-      <div class="section-label">09</div>
+      <div class="section-label">09 · Người trình bày 9–10</div>
       <h2>Kết luận</h2>
-      <div class="conclusion-content">
-        <p class="lead">Insertion Sort là thuật toán <strong>ổn định</strong>, hiệu quả với dữ liệu gần đúng.</p>
-        <div class="conclusion-points">
-          <div class="point"><span class="icon">★</span><p>Thường được dùng kết hợp trong các thuật toán hybrid hiện đại (Timsort).</p></div>
-          <div class="point"><span class="icon">→</span><p>Phù hợp sắp xếp online / streaming data và mảng gần như đã sắp xếp.</p></div>
-        </div>
-        <div class="thank-you">
-          <h3>Cảm ơn đã lắng nghe!</h3>
-          <p>Phương pháp Chèn Trực tiếp – Insertion Sort</p>
-        </div>
+      <div class="script-block">
+        <span class="speaker-tag">Đọc to</span>
+        <p>Insertion Sort (Sắp xếp chèn) là thuật toán <strong>ổn định</strong>, hiệu quả với dữ liệu gần đúng. Thường được dùng kết hợp trong các thuật toán hybrid hiện đại như Timsort. Phù hợp sắp xếp online và mảng gần như đã sắp xếp.</p>
+        <p>Nhóm em xin cảm ơn thầy cô và các bạn đã lắng nghe. Nếu có câu hỏi, nhóm em sẵn sàng trả lời.</p>
+      </div>
+      <div class="thank-you">
+        <h3>Cảm ơn đã lắng nghe!</h3>
+        <p>Phương pháp Chèn Trực tiếp – Insertion Sort (Sắp xếp chèn)</p>
       </div>
     </div>
   </section>
