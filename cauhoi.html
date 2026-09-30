@@ -1,22 +1,63 @@
-<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Cau hoi Insertion</title>
-<style>body{font-family:sans-serif;background:#0b1020;color:#eef2ff;padding:24px}button{display:block;width:100%;max-width:720px;text-align:left;margin:8px 0;padding:12px;border-radius:10px;border:1px solid #334;background:#151b2e;color:#fff} .ok{background:#143} .bad{background:#411} .ex{margin-top:12px;padding:12px;background:#151b2e;border-left:4px solid #7c6cf0}</style></head><body>
-<h1>Cau hoi Insertion Sort</h1>
-<p id="q"></p><div id="opts"></div><div id="ex" class="ex" style="display:none"></div>
-<p><button id="next" type="button">Cau tiep</button></p>
-<p><a href="./index.html" style="color:#cfc6ff">Ve bai giang</a></p>
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Câu hỏi Insertion Sort</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Be Vietnam Pro',sans-serif;background:#0b1020;color:#eef2ff;padding:24px;max-width:800px;margin:0 auto}
+h1{font-size:1.5rem} .sub{color:#9aa6c2;margin-bottom:16px}
+.card{background:#151b2e;border-radius:16px;padding:20px}
+button.opt{display:flex;gap:10px;width:100%;text-align:left;margin:8px 0;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#101628;color:#fff;font:inherit;cursor:pointer}
+.k{min-width:26px;font-weight:700;color:#cfc6ff}
+.ok{border-color:#2dd4a8;background:rgba(45,212,168,.12)}
+.bad{border-color:#f07178;background:rgba(240,113,120,.12)}
+.ex{margin-top:12px;padding:12px;border-left:4px solid #7c6cf0;background:#101628;border-radius:10px;color:#9aa6c2;display:none;line-height:1.7}
+.nav{margin-top:14px;display:flex;justify-content:space-between}
+.nav button{background:#7c6cf0;border:0;color:#fff;border-radius:10px;padding:10px 14px;font:inherit;cursor:pointer}
+a{color:#cfc6ff}
+</style></head><body>
+<p class="sub">WEB 1 · INSERTION SORT</p>
+<h1>Câu hỏi trắc nghiệm</h1>
+<p class="sub">Bấm A B C D. Sau khi chọn sẽ hiện đáp án và giải thích bằng tiếng Việt.</p>
+<div class="card"><p id="num"></p><p id="q" style="font-size:1.15rem;line-height:1.6"></p><div id="opts"></div><div class="ex" id="ex"></div>
+<div class="nav"><button type="button" id="prev">Câu trước</button><button type="button" id="next">Câu tiếp</button></div>
+<p class="sub" id="score"></p></div>
+<p class="sub"><a href="./index.html">Về bài giảng</a></p>
 <script>
 const Q=[
-{q:"Y tuong Insertion Sort giong viec nao?",a:["Chon min dua len dau","Sap bai tren tay, chen vao dung cho","Doi cho ngay khi sai","Day so lon ve cuoi"],c:1,e:"Giong sap bai: lay key roi chen vao day da sap."},
-{q:"Phan tu nao coi nhu da sap luc dau?",a:["Phan tu cuoi","Phan tu giua","Phan tu dau","Khong co"],c:2,e:"i chay tu 1 vi phan tu dau da sap."},
-{q:"key = a[i] nghia la gi?",a:["Xoa a[i]","Luu gia tri dang xet","Doi cho a[0]","Tang i"],c:1,e:"Cat a[i] vao key roi moi dich cac phan tu lon hon."},
-{q:"While dich khi nao?",a:["a[j] > key va j>=0","a[j] < key","Mang da sap","i=0"],c:0,e:"Con ben trai lon hon key thi dich sang phai."},
-{q:"Sau while lam gi?",a:["Xoa key","Gan a[0]","Chen key vao a[j+1]","Doi min"],c:2,e:"a[j+1] = key."},
-{q:"Mang da sap thi do phuc tap?",a:["O(n^2)","O(n)","O(1)","O(n log n)"],c:1,e:"While khong chay. Dat O(n)."},
-{q:"Insertion Sort on dinh?",a:["Khong","Co","Chi khi n nho","Chi C++"],c:1,e:"On dinh, giu thu tu phan tu bang nhau."},
-{q:"Khong nen dung khi nao?",a:["Mang nho","Gan sap","Du lieu lon dao nguoc","Can on dinh"],c:2,e:"Truong hop xau O(n^2)."}
+{q:"Ý tưởng Insertion Sort giống việc nào nhất?",a:["Chọn người thấp nhất đưa lên đầu hàng","Sắp bài trên tay, chèn lá bài vào đúng chỗ","Đổi chỗ ngay khi thấy hai số đứng sai","Đẩy số lớn về cuối như bọt khí"],c:1,e:"Bài giảng nói: coi phần tử đầu đã sắp, lấy key rồi chèn vào chỗ trống."},
+{q:"Phần tử nào được coi như đã sắp lúc bắt đầu?",a:["Phần tử cuối","Phần tử giữa","Phần tử đầu","Không phần tử nào"],c:2,e:"Bước 1: i chạy từ 1 đến n-1 vì phần tử đầu coi như đã sắp."},
+{q:"key bằng a[i] nghĩa là gì?",a:["Xóa a[i]","Lưu giá trị đang xét để chèn sau","Đổi chỗ a[i] với a[0]","Tăng i lên 1"],c:1,e:"Bước 2: cất a[i] vào key, rồi mới dịch các phần tử lớn hơn key."},
+{q:"Vòng while dịch phần tử khi nào?",a:["Khi a[j] lớn hơn key và j còn lớn hơn hoặc bằng 0","Khi a[j] nhỏ hơn key","Khi mảng đã sắp","Khi i bằng 0"],c:0,e:"Bước 3: còn phần tử bên trái lớn hơn key thì dịch sang phải."},
+{q:"Sau khi hết while, làm gì với key?",a:["Xóa key","Gán key vào a[0]","Chèn key vào a[j+1]","Đổi key với phần tử nhỏ nhất"],c:2,e:"Bước 4: a[j+1] được gán bằng key."},
+{q:"Nếu mảng đã sắp sẵn thì độ phức tạp là gì?",a:["O(n bình phương)","O(n)","O(1)","O(n log n)"],c:1,e:"Vòng while không chạy. Thời gian tăng gần bằng n nên là O(n)."},
+{q:"Insertion Sort có ổn định không?",a:["Không","Có, thuật toán ổn định","Chỉ khi n nhỏ","Chỉ khi dùng C++"],c:1,e:"Ổn định nghĩa là giữ thứ tự các phần tử bằng nhau."},
+{q:"Không nên dùng Insertion Sort khi nào?",a:["Mảng nhỏ","Dữ liệu gần sắp","Dữ liệu lớn và đảo ngược hoàn toàn","Cần thuật toán ổn định"],c:2,e:"Trường hợp xấu là O(n bình phương), chậm khi n lớn."}
 ];
-let i=0,score=0,done=false;
-function render(){const t=Q[i];document.getElementById('q').textContent='Cau '+(i+1)+': '+t.q;const box=document.getElementById('opts');box.innerHTML='';document.getElementById('ex').style.display='none';done=false;
-['A','B','C','D'].forEach((k,idx)=>{const b=document.createElement('button');b.textContent=k+'. '+t.a[idx];b.onclick=function(){if(done)return;done=true;if(idx===t.c){b.className='ok';score++;}else{b.className='bad';}document.getElementById('ex').style.display='block';document.getElementById('ex').textContent=(idx===t.c?'Dung. ':'Sai. ')+'Dap an: '+['A','B','C','D'][t.c]+'. '+t.e;};box.appendChild(b);});}
- document.getElementById('next').onclick=function(){if(i<Q.length-1){i++;render();}else{document.getElementById('q').textContent='Diem: '+score+' / '+Q.length;document.getElementById('opts').innerHTML='';document.getElementById('ex').style.display='block';document.getElementById('ex').textContent='Het bai.';}};render();
+let i=0,picked=Array(Q.length).fill(null),score=0;
+function render(){
+const t=Q[i]; document.getElementById('num').textContent='Câu '+(i+1)+' / '+Q.length;
+document.getElementById('q').textContent=t.q;
+const box=document.getElementById('opts'); box.innerHTML='';
+const letters=['A','B','C','D'];
+t.a.forEach(function(txt,k){
+const b=document.createElement('button'); b.className='opt'; b.type='button';
+b.innerHTML='<span class="k">'+letters[k]+'</span><span>'+txt+'</span>';
+if(picked[i]!==null){b.disabled=true; if(k===t.c)b.classList.add('ok'); if(k===picked[i]&&k!==t.c)b.classList.add('bad');}
+else b.onclick=function(){if(picked[i]!==null)return; picked[i]=k; if(k===t.c)score++; render();};
+box.appendChild(b);
+});
+const ex=document.getElementById('ex');
+if(picked[i]!==null){ex.style.display='block'; ex.innerHTML='<b style="color:#fff">'+(picked[i]===t.c?'Đúng. ':'Sai. ')+'Đáp án: '+letters[t.c]+'</b><br>'+t.e;}
+else {ex.style.display='none'; ex.textContent='';}
+document.getElementById('prev').disabled=i===0;
+document.getElementById('next').textContent=i===Q.length-1?'Xem điểm':'Câu tiếp';
+const done=picked.filter(function(x){return x!==null;}).length;
+document.getElementById('score').textContent=done?('Đã trả lời '+done+'/'+Q.length+' · Đúng '+score+' câu'):'Chưa chọn đáp án';
+}
+document.getElementById('prev').onclick=function(){if(i>0){i--;render();}};
+document.getElementById('next').onclick=function(){
+if(i<Q.length-1){i++;render();}
+else{document.getElementById('q').textContent='Bạn đúng '+score+' / '+Q.length+' câu.'; document.getElementById('opts').innerHTML=''; document.getElementById('ex').style.display='block'; document.getElementById('ex').textContent='Hết bài Insertion Sort.';}
+};
+render();
 </script></body></html>
