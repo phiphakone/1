@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Cau hoi Insertion</title>
+<style>body{font-family:sans-serif;background:#0b1020;color:#eef2ff;padding:24px}button{display:block;width:100%;max-width:720px;text-align:left;margin:8px 0;padding:12px;border-radius:10px;border:1px solid #334;background:#151b2e;color:#fff} .ok{background:#143} .bad{background:#411} .ex{margin-top:12px;padding:12px;background:#151b2e;border-left:4px solid #7c6cf0}</style></head><body>
+<h1>Cau hoi Insertion Sort</h1>
+<p id="q"></p><div id="opts"></div><div id="ex" class="ex" style="display:none"></div>
+<p><button id="next" type="button">Cau tiep</button></p>
+<p><a href="./index.html" style="color:#cfc6ff">Ve bai giang</a></p>
+<script>
+const Q=[
+{q:"Y tuong Insertion Sort giong viec nao?",a:["Chon min dua len dau","Sap bai tren tay, chen vao dung cho","Doi cho ngay khi sai","Day so lon ve cuoi"],c:1,e:"Giong sap bai: lay key roi chen vao day da sap."},
+{q:"Phan tu nao coi nhu da sap luc dau?",a:["Phan tu cuoi","Phan tu giua","Phan tu dau","Khong co"],c:2,e:"i chay tu 1 vi phan tu dau da sap."},
+{q:"key = a[i] nghia la gi?",a:["Xoa a[i]","Luu gia tri dang xet","Doi cho a[0]","Tang i"],c:1,e:"Cat a[i] vao key roi moi dich cac phan tu lon hon."},
+{q:"While dich khi nao?",a:["a[j] > key va j>=0","a[j] < key","Mang da sap","i=0"],c:0,e:"Con ben trai lon hon key thi dich sang phai."},
+{q:"Sau while lam gi?",a:["Xoa key","Gan a[0]","Chen key vao a[j+1]","Doi min"],c:2,e:"a[j+1] = key."},
+{q:"Mang da sap thi do phuc tap?",a:["O(n^2)","O(n)","O(1)","O(n log n)"],c:1,e:"While khong chay. Dat O(n)."},
+{q:"Insertion Sort on dinh?",a:["Khong","Co","Chi khi n nho","Chi C++"],c:1,e:"On dinh, giu thu tu phan tu bang nhau."},
+{q:"Khong nen dung khi nao?",a:["Mang nho","Gan sap","Du lieu lon dao nguoc","Can on dinh"],c:2,e:"Truong hop xau O(n^2)."}
+];
+let i=0,score=0,done=false;
+function render(){const t=Q[i];document.getElementById('q').textContent='Cau '+(i+1)+': '+t.q;const box=document.getElementById('opts');box.innerHTML='';document.getElementById('ex').style.display='none';done=false;
+['A','B','C','D'].forEach((k,idx)=>{const b=document.createElement('button');b.textContent=k+'. '+t.a[idx];b.onclick=function(){if(done)return;done=true;if(idx===t.c){b.className='ok';score++;}else{b.className='bad';}document.getElementById('ex').style.display='block';document.getElementById('ex').textContent=(idx===t.c?'Dung. ':'Sai. ')+'Dap an: '+['A','B','C','D'][t.c]+'. '+t.e;};box.appendChild(b);});}
+ document.getElementById('next').onclick=function(){if(i<Q.length-1){i++;render();}else{document.getElementById('q').textContent='Diem: '+score+' / '+Q.length;document.getElementById('opts').innerHTML='';document.getElementById('ex').style.display='block';document.getElementById('ex').textContent='Het bai.';}};render();
+</script></body></html>
