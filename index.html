@@ -3,44 +3,42 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Phuong phap Chen Truc tiep</title>
+<title>Phương pháp Chèn Trực tiếp – Insertion Sort</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"/>
 <link rel="stylesheet" href="polish.css"/>
 <style>
 .script-block{background:var(--bg-card);border-radius:var(--radius);padding:28px 32px;border:1px solid rgba(255,255,255,0.05);margin-bottom:20px;border-left:4px solid var(--accent)}
 .script-block p{color:var(--text-muted);font-size:1.05rem;line-height:1.75;margin-bottom:14px}
-.hero-orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.45}
-.orb-1{width:280px;height:280px;background:rgba(124,108,240,0.5);top:10%;left:15%}
 .hero{position:relative;overflow:hidden}
 .cmt{color:#8aa0b8;font-style:italic}
-.quiz-btn{display:inline-block;background:#7c6cf0;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:12px;margin-top:16px}
+.quiz-btn{display:inline-block;background:#7c6cf0;color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:12px;margin-top:16px}
 </style></head>
 <body>
 <section class="section hero" id="hero">
 <div class="hero-content">
-<p class="eyebrow">Cac phuong phap sap xep thong dung</p>
-<h1>Phuong phap<br><span class="highlight">Chen Truc tiep</span></h1>
-<p class="subtitle">Insertion Sort</p>
-<p class="hero-desc">Bai thuyet trinh nhom</p>
-<a class="quiz-btn" href="quiz.html">Lam cau hoi A B C D</a>
+<p class="eyebrow">Các phương pháp sắp xếp thông dụng</p>
+<h1>Phương pháp<br><span class="highlight">Chèn Trực tiếp</span></h1>
+<p class="subtitle">Insertion Sort (Sắp xếp chèn)</p>
+<p class="hero-desc">Bài thuyết trình nhóm</p>
+<a class="quiz-btn" href="quiz.html">Làm câu hỏi A B C D</a>
 </div></section>
-<section class="section" id="idea"><div class="container"><h2>Tu y tuong</h2>
-<div class="script-block"><p>Y tuong giong sap bai tren tay. Coi phan tu dau da sap. Lay key, dich phan tu lon hon key sang phai, roi chen key vao cho trong. Thuat toan on dinh.</p></div></div></section>
-<section class="section" id="algo"><div class="container"><h2>Thuat toan chi tiet</h2>
+<section class="section" id="idea"><div class="container"><h2>Từ ý tưởng</h2>
+<div class="script-block"><p>Ý tưởng giống sắp bài trên tay. Coi phần tử đầu đã sắp. Lấy <strong>key</strong>, dịch phần tử lớn hơn key sang phải, rồi chèn key vào chỗ trống. Thuật toán <strong>ổn định</strong>.</p></div></div></section>
+<section class="section dark" id="when"><div class="container"><h2>Khi nào nên dùng</h2>
+<div class="script-block"><p>Nên dùng khi mảng nhỏ, dữ liệu gần sắp, cần ổn định. Không nên dùng khi mảng lớn vì <strong>O(n²)</strong>.</p></div></div></section>
+<section class="section" id="algo"><div class="container"><h2>Thuật toán chi tiết</h2>
 <div class="script-block">
-<p><strong>Buoc 1:</strong> i chay tu 1 den n-1.</p>
-<p><strong>Buoc 2:</strong> key = a[i], j = i-1.</p>
-<p><strong>Buoc 3:</strong> while j>=0 va a[j]>key: dich sang phai.</p>
-<p><strong>Buoc 4:</strong> chen key vao a[j+1]. Neu da sap thi O(n).</p>
+<p><strong>Bước 1:</strong> i chạy từ 1 đến n-1.</p>
+<p><strong>Bước 2:</strong> key = a[i], j = i-1.</p>
+<p><strong>Bước 3:</strong> while j&gt;=0 và a[j]&gt;key: dịch sang phải.</p>
+<p><strong>Bước 4:</strong> chèn key vào a[j+1]. Nếu đã sắp thì O(n).</p>
 </div></div></section>
-<section class="section" id="code"><div class="container"><h2>Ma gia va C++</h2>
-<p><a class="quiz-btn" href="quiz.html">Lam cau hoi A B C D</a></p>
-</div></section>
-<section class="section conclusion" id="conclusion"><div class="container"><h2>Ket luan</h2>
-<div class="script-block"><p>Insertion Sort on dinh, phu hop mang nho. Nhom em xin cam on thay co va cac ban.</p>
-<p><a class="quiz-btn" href="quiz.html">Lam cau hoi A B C D</a></p>
-</div></div></section>
+<section class="section" id="code"><div class="container"><h2>Mã giả &amp; C++</h2>
+<div class="script-block"><p>Vòng for lấy từng phần tử, lưu key, while dịch sang phải, rồi chèn key.</p>
+<p><a class="quiz-btn" href="quiz.html">Làm câu hỏi A B C D</a></p></div></div></section>
+<section class="section conclusion" id="conclusion"><div class="container"><h2>Kết luận</h2>
+<div class="script-block"><p>Insertion Sort ổn định, phù hợp mảng nhỏ. Nhóm em xin cảm ơn thầy cô và các bạn.</p>
+<p><a class="quiz-btn" href="quiz.html">Làm câu hỏi A B C D</a></p></div></div></section>
 <script src="script.js"></script>
 </body></html>
