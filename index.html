@@ -9,18 +9,19 @@
 <link rel="stylesheet" href="polish.css"/>
 <link rel="stylesheet" href="projector.css"/>
 <style>
-.script-block{background:var(--bg-card);border-radius:var(--radius);padding:28px 32px;border:1px solid rgba(255,255,255,0.05);margin-bottom:20px;border-left:4px solid var(--accent)}
-.script-block p{color:#ffffff;font-size:1.08rem;line-height:1.8;margin-bottom:14px}
-.script-block strong{color:#ffffff}
+.script-block{background:var(--bg-card);border-radius:var(--radius);padding:28px 32px;border:1px solid rgba(255,255,255,.08);margin-bottom:20px;border-left:4px solid #7c6cf0}
+.script-block p{color:#fff;font-size:1.08rem;line-height:1.85;margin-bottom:16px}
+.script-block strong{color:#fff}
 .hero{position:relative;overflow:hidden}
-.cmt{color:#ffe08a;font-style:italic;font-weight:400}
-.highlight{-webkit-text-fill-color:#ffffff;color:#ffffff;background:none}
+.cmt{color:#ffe08a;font-style:italic}
+.highlight{-webkit-text-fill-color:#fff;color:#fff;background:none}
+h2,h1,p,li{color:#fff}
 </style>
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
 <nav class="nav-dots" id="navDots">
-<a href="#hero" data-section="0" data-label="Mở đầu" class="active"></a>
+<a href="#hero" class="active" data-section="0" data-label="Mở đầu"></a>
 <a href="#idea" data-section="1" data-label="Ý tưởng"></a>
 <a href="#when" data-section="2" data-label="Khi nào dùng"></a>
 <a href="#algo" data-section="3" data-label="Thuật toán"></a>
@@ -36,70 +37,95 @@
 <div class="hero-content">
 <p class="eyebrow">Các phương pháp sắp xếp thông dụng</p>
 <h1>Phương pháp<br><span class="highlight">Chèn Trực tiếp</span></h1>
-<p class="subtitle">Insertion Sort (Sắp xếp chèn)</p>
-<p class="hero-desc">Bài thuyết trình nhóm</p>
+<p class="subtitle">Insertion Sort – Sắp xếp chèn</p>
+<p class="hero-desc">Bài thuyết trình nhóm. Em sẽ nói từ ý tưởng, thuật toán, mã giả, C++, ví dụ, ưu nhược điểm.</p>
 </div></section>
 
 <section class="section" id="idea"><div class="container">
 <h2>Từ ý tưởng</h2>
 <div class="script-block">
-<p>Ý tưởng của Insertion Sort giống việc sắp bài trên tay. Khi chơi bài, tay trái cầm dãy bài đã xếp sẵn. Tay phải rút thêm một lá. Lá mới đó gọi là <strong>key</strong>.</p>
-<p>Em nhìn dãy bài đã sắp, dịch những lá lớn hơn key sang phải để tạo chỗ trống, rồi nhét key vào đúng chỗ. Làm lần lượt từng lá cho đến hết.</p>
-<p>Trên máy tính cũng vậy. Phần tử đầu coi như đã sắp. Lấy phần tử tiếp theo làm key. Dịch các phần tử lớn hơn key sang phải. Chèn key vào chỗ trống.</p>
-<p>Thuật toán này <strong>ổn định</strong>. Ổn định nghĩa là nếu hai phần tử bằng nhau thì thứ tự cũ vẫn giữ nguyên. Insertion Sort cũng rất nhanh khi dữ liệu gần như đã sắp sẵn.</p>
+<p>Insertion Sort tiếng Việt gọi là phương pháp chèn trực tiếp. Ý tưởng rất gần với đời sống. Giống lúc chơi bài. Tay trái cầm dãy bài đã xếp từ nhỏ đến lớn. Tay phải rút thêm một lá mới. Lá mới đó gọi là <strong>key</strong>.</p>
+<p>Em không nhét đại lá mới vào cuối. Em nhìn dãy đã sắp, tìm đúng chỗ. Những lá lớn hơn key thì dịch sang phải một ô, tạo ra chỗ trống. Rồi nhét key vào chỗ trống đó. Làm lần lượt từng lá đến hết bộ bài.</p>
+<p>Trên máy tính cũng thế. Mảng a có n phần tử. Phần tử đầu a[0] coi như đã sắp. Sau đó lấy a[1], a[2], … đến a[n-1]. Mỗi lần lấy một số gọi là key. So key với các số bên trái. Số bên trái lớn hơn key thì dịch sang phải. Hết chỗ phải dịch thì chèn key vào.</p>
+<p>Tại sao gọi là chèn trực tiếp? Vì em không tìm min rồi đổi một lần như Selection Sort. Cũng không đổi chỗ từng cặp liền kề như Bubble Sort. Em <strong>chèn</strong> phần tử đang xét vào đúng vị trí trong đoạn đã sắp.</p>
+<p>Thuật toán này <strong>ổn định</strong>. Ổn định nghĩa là nếu hai phần tử có giá trị bằng nhau, thứ tự ban đầu của chúng không bị đảo. Insertion Sort cũng nhanh khi dữ liệu gần sắp sẵn, vì lúc đó gần như không phải dịch.</p>
 </div></div></section>
 
 <section class="section dark" id="when"><div class="container">
 <h2>Khi nào nên dùng / không nên dùng</h2>
 <div class="script-block">
-<p>Nên dùng khi mảng nhỏ hoặc trung bình. Nên dùng khi dữ liệu gần đúng, gần sắp rồi. Nên dùng khi cần thuật toán ổn định. Nên dùng khi dữ liệu đến từ từ, gọi là <strong>online sorting</strong>. Mỗi lần có thêm một phần tử mới, chỉ việc chèn vào dãy đã sắp.</p>
-<p>Không nên dùng khi mảng lớn và đảo ngược hoàn toàn. Trường hợp xấu là <strong>O(n²)</strong>. Chữ O đọc là ô. O(n²) nghĩa là số bước khoảng n nhân n. Ví dụ một trăm phần tử thì khoảng mười nghìn bước, chậm.</p>
+<p>Nên dùng khi mảng nhỏ hoặc trung bình, khoảng vài chục phần tử. Lý do là code ngắn, dễ viết, dễ kiểm tra.</p>
+<p>Nên dùng khi dữ liệu gần đúng rồi. Ví dụ danh sách gần như đã xếp, chỉ lệch vài chỗ. Insertion Sort chỉ việc chèn vài phần tử, rất nhanh.</p>
+<p>Nên dùng khi cần thuật toán ổn định. Ví dụ sắp sinh viên theo điểm, nếu hai bạn cùng điểm thì vẫn giữ thứ tự cũ.</p>
+<p>Nên dùng khi dữ liệu đến dần. Cứ thêm một phần tử mới là chèn vào dãy đã sắp. Cách này gọi là <strong>online sorting</strong>.</p>
+<p>Không nên dùng khi mảng rất lớn, hàng nghìn hàng chục nghìn phần tử, lại đảo ngược hoàn toàn. Trường hợp xấu là <strong>O(n²)</strong>. Chữ O đọc là ô. O(n²) nghĩa là số bước xấp xỉ n nhân n. Một trăm phần tử khoảng mười nghìn bước. Một nghìn phần tử khoảng một triệu bước. Chậm.</p>
+<p>Tóm lại: học thì rất nên học. Dữ liệu nhỏ hoặc gần sắp thì dùng được. Dữ liệu lớn thì không dùng.</p>
 </div>
 <div class="suitable-grid">
-<div class="card good"><h4>✓ Phù hợp khi</h4><ul><li>Dữ liệu gần đúng / gần sắp</li><li>Mảng nhỏ đến trung bình</li><li>Cần thuật toán ổn định</li><li>Online sorting</li></ul></div>
-<div class="card bad"><h4>✗ Không phù hợp khi</h4><ul><li>Dữ liệu lớn và đảo ngược</li><li>Cần hiệu suất cao</li></ul></div>
+<div class="card good"><h4>✓ Phù hợp khi</h4><ul>
+<li>Dữ liệu gần đúng / gần sắp</li>
+<li>Mảng nhỏ đến trung bình</li>
+<li>Cần thuật toán ổn định</li>
+<li>Online sorting, nhận dữ liệu dần</li>
+</ul></div>
+<div class="card bad"><h4>✗ Không phù hợp khi</h4><ul>
+<li>Dữ liệu lớn và đảo ngược</li>
+<li>Cần hiệu suất cao như thư viện chuẩn</li>
+</ul></div>
 </div></div></section>
 
 <section class="section" id="algo"><div class="container">
 <h2>Thuật toán chi tiết</h2>
 <div class="script-block">
-<p><strong>Bước 1:</strong> i chạy từ 1 đến n trừ 1. Em không bắt đầu từ 0 vì phần tử đầu a[0] coi như đã sắp rồi.</p>
-<p><strong>Bước 2:</strong> key gán bằng a của i. Nghĩa là cất giá trị đang xét vào biến key. j gán bằng i trừ 1, nghĩa là j trỏ vào phần tử đứng ngay trước key.</p>
-<p><strong>Bước 3:</strong> trong khi j còn lớn hơn hoặc bằng 0, và a của j còn lớn hơn key, em dịch a của j sang phải, tức a[j+1] bằng a[j], rồi giảm j đi 1 để xét phần tử bên trái tiếp theo.</p>
-<p><strong>Bước 4:</strong> khi vòng while dừng, chỗ trống nằm ở a[j+1]. Em gán a[j+1] bằng key, tức chèn key vào đúng chỗ.</p>
-<p>Nếu mảng đã sắp sẵn thì a[j] không lớn hơn key, vòng while không chạy lần nào. Lúc đó độ phức tạp là <strong>O(n)</strong>. O(n) nghĩa là thời gian tăng gần đúng bằng số phần tử n, nên nhanh.</p>
+<p>Em chia Insertion Sort thành bốn bước để dễ nhớ khi thuyết trình.</p>
+<p><strong>Bước 1.</strong> Cho i chạy từ 1 đến n trừ 1. Không chạy từ 0. Vì a[0] đã coi như đoạn đã sắp. i là vị trí phần tử sắp được lấy ra để chèn.</p>
+<p><strong>Bước 2.</strong> key gán bằng a[i]. Phải cất a[i] vào key trước, vì lát nữa khi dịch sang phải, ô a[i] sẽ bị ghi đè. j gán bằng i trừ 1. j là con trỏ đi sang trái, bắt đầu từ phần tử ngay trước key.</p>
+<p><strong>Bước 3.</strong> Lặp while khi còn đủ hai điều kiện. Điều kiện một: j còn lớn hơn hoặc bằng 0, nghĩa là chưa hết mảng bên trái. Điều kiện hai: a[j] lớn hơn key, nghĩa là phần tử trái còn lớn hơn key nên phải dời. Mỗi vòng: a[j+1] bằng a[j], dịch sang phải một ô, rồi j giảm 1.</p>
+<p><strong>Bước 4.</strong> Khi while dừng, chỗ trống nằm đúng ở a[j+1]. Gán a[j+1] bằng key. Xong một lần chèn. Tăng i, làm phần tử tiếp theo.</p>
+<p>Nếu mảng đã sắp sẵn, a[j] không lớn hơn key, while không chạy. Mỗi i chỉ làm vài phép gán. Tổng thời gian gần bằng n. Đó là <strong>O(n)</strong>. O(n) nghĩa là thời gian tăng gần đúng với số phần tử, nên nhanh.</p>
+<p>Nếu mảng đảo ngược, mỗi key đều nhỏ hơn tất cả số bên trái, phải dịch gần hết đoạn đã sắp. Tổng bước khoảng n nhân n, là <strong>O(n²)</strong>.</p>
 </div></div></section>
 
 <section class="section dark" id="visual"><div class="container">
 <h2>Sơ đồ minh họa từng bước</h2>
 <div class="script-block">
-<p>Mọi người nhìn mảng trên màn hình. Ban đầu là <strong>12, 11, 13, 5, 6</strong>. Phần tử đầu 12 coi như đã sắp.</p>
-<p>Lần một. i bằng 1. Key bằng 11. Bên trái là 12, lớn hơn 11, nên dịch 12 sang phải. Chèn 11 vào đầu. Mảng thành 11, 12, 13, 5, 6.</p>
-<p>Lần hai. i bằng 2. Key bằng 13. Bên trái là 12, nhỏ hơn 13, không cần dịch. 13 đã đúng chỗ.</p>
-<p>Lần ba. i bằng 3. Key bằng 5. 5 nhỏ hơn 13, dịch 13. 5 nhỏ hơn 12, dịch 12. 5 nhỏ hơn 11, dịch 11. Chèn 5 vào đầu. Mảng thành 5, 11, 12, 13, 6.</p>
-<p>Lần bốn. i bằng 4. Key bằng 6. Dịch 13, 12, 11 sang phải. 6 lớn hơn 5 nên dừng. Chèn 6 vào sau 5. Kết quả <strong>5, 6, 11, 12, 13</strong>.</p>
-<p>Mọi người có thể bấm nút Trước và Tiếp để xem từng bước cho dễ hình dung.</p>
+<p>Mọi người nhìn mảng trên màn hình giúp em. Ban đầu: <strong>12, 11, 13, 5, 6</strong>. Năm phần tử. Phần tử đầu 12 coi như đã sắp.</p>
+<p><strong>Lần i = 1.</strong> Key = 11. Nhìn sang trái thấy 12. 12 lớn hơn 11 nên dịch 12 sang phải. Mảng tạm: trống, 12, 13, 5, 6. Chèn 11 vào chỗ trống. Được 11, 12, 13, 5, 6. Đoạn đã sắp giờ là 11, 12.</p>
+<p><strong>Lần i = 2.</strong> Key = 13. Bên trái là 12. 12 nhỏ hơn 13 nên không dịch. 13 đã đúng chỗ. Mảng vẫn 11, 12, 13, 5, 6. Đoạn đã sắp là 11, 12, 13.</p>
+<p><strong>Lần i = 3.</strong> Key = 5. So với 13: 5 nhỏ hơn, dịch 13. So với 12: dịch 12. So với 11: dịch 11. Hết bên trái. Chèn 5 vào đầu. Được 5, 11, 12, 13, 6.</p>
+<p><strong>Lần i = 4.</strong> Key = 6. So với 13: dịch 13. So với 12: dịch 12. So với 11: dịch 11. So với 5: 5 nhỏ hơn 6, dừng. Chèn 6 vào sau 5. Kết quả <strong>5, 6, 11, 12, 13</strong>.</p>
+<p>Nhìn lại: mỗi lần chỉ lấy một số, chèn vào dãy đã sắp bên trái. Không cần tìm min. Không cần đổi lung tung. Mọi người bấm nút Trước và Tiếp để xem lại.</p>
 </div>
-<div class="visualizer"><div class="array-state" id="arrayState"></div>
-<div class="visual-controls"><button id="prevStep" class="btn">← Trước</button><span class="step-label" id="stepLabel">Ban đầu</span><button id="nextStep" class="btn">Tiếp →</button></div>
-<div class="step-explanation" id="stepExplanation"></div></div>
+<div class="visualizer">
+<div class="array-state" id="arrayState"></div>
+<div class="visual-controls">
+<button id="prevStep" class="btn">← Trước</button>
+<span class="step-label" id="stepLabel">Ban đầu</span>
+<button id="nextStep" class="btn">Tiếp →</button>
+</div>
+<div class="step-explanation" id="stepExplanation"></div>
+</div>
 </div></section>
 
 <section class="section" id="code"><div class="container">
 <h2>Mã giả &amp; C++</h2>
 <div class="script-block">
-<p>Bây giờ em sang mã giả và C++. Hai bên làm cùng một việc. Em đọc từng dòng.</p>
-<p>Dòng đầu là tên thuật toán, mảng a có n phần tử, đánh số từ 0.</p>
-<p>Vòng for: i chạy từ 1 đến n trừ 1. Mỗi lần lấy một phần tử chưa sắp.</p>
-<p>key bằng a[i]: cất giá trị đang xét, vì lát nữa a[i] có thể bị ghi đè khi dịch sang phải.</p>
-<p>j bằng i trừ 1: j trỏ phần tử đứng trước key.</p>
-<p>Vòng while: còn j lớn hơn hoặc bằng 0 và a[j] lớn hơn key thì dịch a[j] sang phải, rồi giảm j.</p>
-<p>Hết while thì a[j+1] bằng key. Đó là chỗ trống vừa tạo, chèn key vào đó.</p>
-<p>Bên C++ giống hệt. <strong>void</strong> nghĩa là hàm không trả về giá trị. <strong>int key</strong> và <strong>int j</strong> là số nguyên. <strong>j--</strong> nghĩa là giảm j đi 1.</p>
+<p>Sang phần mã. Có hai cột: mã giả để hiểu logic, C++ để cài đặt. Hai bên cùng một ý. Em đọc từng dòng cho mọi người theo.</p>
+<p><strong>Dòng procedure / void insertionSort.</strong> Khai báo thuật toán. Mảng a, n phần tử. Bên C++, void nghĩa là hàm không trả về giá trị. int a[] là mảng số nguyên. int n là số phần tử.</p>
+<p><strong>Vòng for i từ 1 đến n-1.</strong> Bỏ a[0] vì đã coi như sắp. Mỗi vòng xử lý đúng một phần tử chưa sắp.</p>
+<p><strong>key = a[i].</strong> Cất giá trị ra biến key. Nếu không cất, lúc dịch sang phải sẽ mất số này.</p>
+<p><strong>j = i - 1.</strong> j đứng ngay trước i, bắt đầu đi sang trái.</p>
+<p><strong>while j &gt;= 0 và a[j] &gt; key.</strong> Còn phần tử trái và phần tử đó lớn hơn key thì phải dời. Bên C++ viết &amp;&amp; nghĩa là đồng thời cả hai điều kiện.</p>
+<p><strong>a[j+1] = a[j]; j--.</strong> Dịch một ô sang phải, rồi lùi j. Làm đến khi không còn số nào lớn hơn key, hoặc hết mảng trái.</p>
+<p><strong>a[j+1] = key.</strong> Chèn key vào chỗ trống. Xong một vòng. for tăng i, làm tiếp.</p>
+<p>Đó là toàn bộ Insertion Sort. Không có hàm phụ. Không cần mảng tạm lớn. Chỉ thêm hai biến key và j.</p>
 </div>
-<div class="code-tabs"><button class="tab active" data-tab="pseudo">Mã giả</button><button class="tab" data-tab="cpp">C++</button></div>
-<div class="code-panel active" id="pseudo"><pre><code>procedure InsertionSort(a[0..n−1])   <span class="cmt">// bắt đầu, mảng a có n phần tử</span>
-  for i ← 1 to n−1 do                <span class="cmt">// i từ 1 vì a[0] đã coi như sắp</span>
+<div class="code-tabs">
+<button class="tab active" data-tab="pseudo">Mã giả</button>
+<button class="tab" data-tab="cpp">C++</button>
+</div>
+<div class="code-panel active" id="pseudo"><pre><code>procedure InsertionSort(a[0..n−1])   <span class="cmt">// bắt đầu, a có n phần tử</span>
+  for i ← 1 to n−1 do                <span class="cmt">// i từ 1 vì a[0] đã sắp</span>
     key ← a[i]                       <span class="cmt">// cất giá trị đang xét</span>
     j ← i − 1                        <span class="cmt">// j trỏ phần tử đứng trước</span>
     while j ≥ 0 and a[j] &gt; key do    <span class="cmt">// trái còn lớn hơn key?</span>
@@ -125,31 +151,39 @@ end procedure</code></pre></div>
 <section class="section dark" id="example"><div class="container">
 <h2>Mô hình ví dụ – Sinh viên</h2>
 <div class="script-block">
-<p>Ví dụ thực tế: sắp danh sách sinh viên theo điểm từ thấp lên cao. Ban đầu điểm lộn xộn. Chạy Insertion Sort xong được thứ tự:</p>
-<p><strong>Lê Văn C 6.8 → Nguyễn Văn A 7.5 → Trần Thị B 8.2 → Phạm Thị D 9.0</strong></p>
-<p>Mỗi lần lấy một sinh viên, so điểm với những người đã xếp, dịch người điểm cao hơn sang phải, rồi chèn sinh viên đó vào đúng chỗ.</p>
+<p>Em lấy ví dụ gần lớp học. Có bốn sinh viên, điểm chưa theo thứ tự.</p>
+<p>Nguyễn Văn A 7.5. Trần Thị B 8.2. Lê Văn C 6.8. Phạm Thị D 9.0.</p>
+<p>Muốn sắp theo điểm tăng dần. Coi A 7.5 đã đứng đầu. Lấy B 8.2, lớn hơn 7.5, không cần dịch, chèn sau A. Lấy C 6.8, nhỏ hơn cả 8.2 lẫn 7.5, dịch A và B sang phải, chèn C lên đầu. Lấy D 9.0, lớn nhất, không dịch, để cuối.</p>
+<p>Kết quả: <strong>Lê Văn C 6.8 → Nguyễn Văn A 7.5 → Trần Thị B 8.2 → Phạm Thị D 9.0</strong>.</p>
+<p>Cùng một cách với số trong mảng. Chỉ khác là ở đây phần tử là sinh viên kèm điểm.</p>
 </div></div></section>
 
 <section class="section" id="pros"><div class="container">
 <h2>Ưu điểm</h2>
 <div class="script-block">
-<p>Thứ nhất, ổn định. Hai phần tử bằng nhau thì không bị đảo thứ tự cũ.</p>
-<p>Thứ hai, rất nhanh khi dữ liệu gần sắp. Trường hợp tốt nhất là O(n).</p>
-<p>Thứ ba, hỗ trợ online sorting. Có thêm phần tử mới thì chỉ việc chèn.</p>
-<p>Thứ tư, sắp tại chỗ, ít bộ nhớ phụ. Thứ năm, code ngắn, dễ hiểu, dễ cài đặt.</p>
+<p>Một, ổn định. Hai phần tử bằng nhau không bị đảo chỗ. Quan trọng khi sắp theo nhiều tiêu chí.</p>
+<p>Hai, trường hợp tốt là O(n). Mảng gần sắp thì gần như không chạy while. Nhanh hơn Selection Sort trong tình huống này, vì Selection luôn O(n²).</p>
+<p>Ba, online sorting. Có thêm dữ liệu mới thì chèn tiếp, không cần chạy lại cả mảng từ đầu theo kiểu khác.</p>
+<p>Bốn, sắp tại chỗ. Chỉ dùng thêm biến key và j. Không cần mảng phụ lớn.</p>
+<p>Năm, dễ hiểu, dễ viết, dễ nhớ. Phù hợp giảng dạy thuật toán cơ bản.</p>
 </div></div></section>
 
 <section class="section dark" id="cons"><div class="container">
 <h2>Nhược điểm</h2>
 <div class="script-block">
-<p>Nhược điểm lớn nhất là trường hợp xấu vẫn <strong>O(n²)</strong>. Mảng lớn mà đảo ngược thì phải dịch rất nhiều lần, chậm.</p>
-<p>Mỗi lần chèn có thể phải dời cả một đoạn đã sắp sang phải. Vì vậy không dùng cho dữ liệu lớn trong hệ thống thật.</p>
+<p>Nhược điểm lớn nhất: trường hợp xấu O(n²). Mảng lớn đảo ngược thì mỗi key phải dịch gần hết đoạn trái. Số phép gán và so sánh tăng rất nhanh.</p>
+<p>Hai, có nhiều lần dịch chuyển. Không phải chỉ đổi chỗ một lần như Selection. Một lần chèn có thể dời cả một đoạn.</p>
+<p>Ba, không phù hợp hệ thống thật với dữ liệu lớn. Thư viện chuẩn thường dùng thuật toán nhanh hơn, ví dụ O(n log n).</p>
+<p>Vì vậy Insertion Sort nên hiểu để nắm ý tưởng chèn, dùng khi n nhỏ hoặc dữ liệu gần sắp. Không dùng thay cho thuật toán lớn.</p>
 </div></div></section>
 
 <section class="section conclusion" id="conclusion"><div class="container">
 <h2>Kết luận</h2>
 <div class="script-block">
-<p>Insertion Sort là phương pháp chèn trực tiếp. Ý tưởng giống sắp bài trên tay. Ổn định. Phù hợp mảng nhỏ và dữ liệu gần đúng. Trường hợp tốt nhất O(n), trường hợp xấu O(n²).</p>
+<p>Em xin tóm lại. Insertion Sort là phương pháp chèn trực tiếp. Ý tưởng giống sắp bài trên tay. Lấy key, dịch số lớn hơn sang phải, chèn key vào chỗ trống.</p>
+<p>Bốn bước: i từ 1 đến n-1; lưu key và j; while dịch sang phải; chèn key vào a[j+1].</p>
+<p>Ổn định. Tốt nhất O(n). Xấu nhất O(n²). Phù hợp mảng nhỏ, dữ liệu gần đúng, online sorting. Không phù hợp dữ liệu lớn.</p>
+<p>Mã giả và C++ làm cùng một việc. Nhìn comment bên phải mỗi dòng để nhớ ý nghĩa.</p>
 <p>Nhóm em xin cảm ơn thầy cô và các bạn đã lắng nghe.</p>
 </div>
 <div class="thank-you"><h3>Cảm ơn đã lắng nghe!</h3></div>
